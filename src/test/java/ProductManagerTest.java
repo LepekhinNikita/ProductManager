@@ -11,7 +11,7 @@ public class ProductManagerTest {
     Product Smartphone = new Smartphone(101, "Xiaomi", 10_000, "Китай");
     Product Smartphone1 = new Smartphone(123, "Asus", 27_000, "Тайвань");
     Product Book = new Book(321, "Муха-Цокотуха", 200, "Чуковский");
-    Product Book1 = new Book(555, "Евгений Онегин", 300, "Пушкин");
+    Product Book1 = new Book(555, "Муму", 590, "Тургеньев");
 
     @BeforeEach
     public void Product() {
@@ -44,10 +44,8 @@ public class ProductManagerTest {
     @Test
     public void shouldFindAnyProducts() {
 
-        Product[] actual = Manager.searchBy("A");
-        Product[] expected = {Smartphone1};
+        Product[] actual = Manager.searchBy("М");
+        Product[] expected = {Book, Book1};
         assertArrayEquals(expected, actual);
     }
-
-
 }
