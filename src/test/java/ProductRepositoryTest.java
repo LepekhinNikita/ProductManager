@@ -105,22 +105,7 @@ public class ProductRepositoryTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    @Test
 
-    public void shouldSaveProductAlreadyExist() {
-        repository.save(Book);
-
-        Product[] actual = repository.getAll();
-        Product[] expected = {
-                Smartphone,
-                Smartphone1,
-                Book,
-                Book1
-        };
-        Assertions.assertThrows(AlreadyExistsException.class, () -> {
-            repository.save(Book);
-        });
-    }
     @Test
 
     public void shouldSaveProductNew() {

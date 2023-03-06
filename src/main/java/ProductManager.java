@@ -1,13 +1,7 @@
 public class ProductManager {
     protected ProductRepository repo;
 
-    public ProductRepository getRepo() {
-        return repo;
-    }
 
-    public void setRepo(ProductRepository repo) {
-        this.repo = repo;
-    }
 
     public ProductManager(ProductRepository repo) {
         this.repo = repo;
@@ -18,9 +12,7 @@ public class ProductManager {
         repo.save(prod);
     }
 
-    public Product[] getAll() {
-        return repo.getAll();
-    }
+
 
     public Product[] searchBy(String text) {
         Product[] result = new Product[0];
