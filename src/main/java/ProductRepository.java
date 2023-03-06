@@ -15,7 +15,20 @@ public class ProductRepository {
         return prod;
     }
 
+    public Product findById(int id) {
+        for (Product prod : prod) {
+            if (prod.getId() == id) {
+                return prod;
+            }
+        }
+        return null;
+    }
+
+
     public void removeById(int id) {
+        if (findById(id) == null) {
+            throw new NotFoundException("Element with id: " + id + " not found");
+        }
         Product[] tmp = new Product[prod.length - 1];
         int copyToIndex = 0;
         for (Product prod : prod) {
@@ -26,4 +39,5 @@ public class ProductRepository {
         }
         prod = tmp;
     }
+
 }

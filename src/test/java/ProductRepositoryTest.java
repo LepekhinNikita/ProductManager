@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 public class ProductRepositoryTest {
 
-    ProductRepository Repository = new ProductRepository();
+    ProductRepository repository = new ProductRepository();
 
 
     Product Smartphone = new Smartphone(101, "Xiaomi", 10_000, "Китай");
@@ -15,17 +15,17 @@ public class ProductRepositoryTest {
     @BeforeEach
     public void Product() {
 
-        Repository.save(Smartphone);
-        Repository.save(Smartphone1);
-        Repository.save(Book);
-        Repository.save(Book1);
+        repository.save(Smartphone);
+        repository.save(Smartphone1);
+        repository.save(Book);
+        repository.save(Book1);
 
     }
     @Test
 
     public void shouldSaveProduct() {
 
-        Product[] actual = Repository.getAll();
+        Product[] actual = repository.getAll();
         Product[] expected = {
                 Smartphone,
                 Smartphone1,
@@ -40,9 +40,9 @@ public class ProductRepositoryTest {
     public void shouldRemoveById() {
 
 
-        Repository.removeById(321);
+        repository.removeById(321);
 
-        Product[] actual = Repository.getAll();
+        Product[] actual = repository.getAll();
         Product[] expected = {
                 Smartphone,
                 Smartphone1,
@@ -55,10 +55,10 @@ public class ProductRepositoryTest {
     @Test
     public void shouldRemoveByTwoId() {
 
-        Repository.removeById(101);
-        Repository.removeById(321);
+        repository.removeById(101);
+        repository.removeById(321);
 
-        Product[] actual = Repository.getAll();
+        Product[] actual = repository.getAll();
         Product[] expected = {
                 Smartphone1,
                 Book1,
@@ -70,16 +70,37 @@ public class ProductRepositoryTest {
     @Test
     public void shouldRemoveAllId() {
 
-        Repository.removeById(101);
-        Repository.removeById(123);
-        Repository.removeById(321);
-        Repository.removeById(555);
+        repository.removeById(101);
+        repository.removeById(123);
+        repository.removeById(321);
+        repository.removeById(555);
 
-        Product[] actual = Repository.getAll();
+        Product[] actual = repository.getAll();
         Product[] expected = {};
 
         Assertions.assertArrayEquals(expected, actual);
     }
+    @Test
+    public void test() {
+
+        Assertions.assertThrows(NotFoundException.class, () -> {
+            repository.removeById(777);
+        });
+    }
+    @Test
+
+    public void shouldRemoveByIdNew() {
 
 
+        repository.removeById(555);
+
+        Product[] actual = repository.getAll();
+        Product[] expected = {
+                Smartphone,
+                Smartphone1,
+                Book,
+        };
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
