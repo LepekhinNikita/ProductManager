@@ -11,6 +11,7 @@ public class ProductRepositoryTest {
     Product Smartphone1 = new Smartphone(123, "Asus", 27_000, "Тайвань");
     Product Book = new Book(321, "Муха-Цокотуха", 200, "Чуковский");
     Product Book1 = new Book(555, "Евгений Онегин", 300, "Пушкин");
+    Product Book2 = new Book(999, "Колобок", 100, "Руские народные сказки");
 
     @BeforeEach
     public void Product() {
@@ -102,5 +103,39 @@ public class ProductRepositoryTest {
         };
 
         Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+
+    public void shouldSaveProductAlreadyExist() {
+        repository.save(Book);
+
+        Product[] actual = repository.getAll();
+        Product[] expected = {
+                Smartphone,
+                Smartphone1,
+                Book,
+                Book1
+        };
+        Assertions.assertThrows(AlreadyExistsException.class, () -> {
+            repository.save(Book);
+        });
+    }
+    @Test
+
+    public void shouldSaveProductNew() {
+        repository.save(Book2);
+
+        Product[] actual = repository.getAll();
+        Product[] expected = {
+                Smartphone,
+                Smartphone1,
+                Book,
+                Book1,
+                Book2
+        };
+        Assertions.assertThrows(AlreadyExistsException.class, () -> {
+            repository.save(Book2);
+        });
     }
 }
