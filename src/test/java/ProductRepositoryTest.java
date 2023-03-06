@@ -81,7 +81,7 @@ public class ProductRepositoryTest {
         Assertions.assertArrayEquals(expected, actual);
     }
     @Test
-    public void test() {
+    public void shouldRemoveByIdWitchIsNot() {
 
         Assertions.assertThrows(NotFoundException.class, () -> {
             repository.removeById(777);
